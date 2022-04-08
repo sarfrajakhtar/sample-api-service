@@ -22,6 +22,15 @@ pipeline {
         }
       }
     }
+    stage('Secret Scanner'){
+      steps{
+          container('trufflehog'){
+            catchError(buildResult:'SUCCESS', stageResult:'FAILURE'){
+              sh 'trufflehog  --regex --entropy=true ./'
+            }
+          }
+      }
+    }
     stage('Build') {
       steps {
         container('maven') {
