@@ -46,7 +46,7 @@ pipeline {
               sh './mvnw test'
             },
           }
-        },
+        }
         stage('Dependency check') {
           steps {
             container('maven') {
